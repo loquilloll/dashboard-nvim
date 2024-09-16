@@ -117,6 +117,15 @@ local function generate_header(config)
     for i, _ in ipairs(header) do
       vim.api.nvim_buf_add_highlight(config.bufnr, 0, 'DashboardHeader', i - 1, 0, -1)
     end
+    vim.schedule(function()
+      vim.defer_fn(function()
+        require('utils.image').do_image({
+          buffer = config.bufnr,
+          x = 45,
+          y = 1,
+        })
+      end, 1)
+    end)
     return
   end
 
